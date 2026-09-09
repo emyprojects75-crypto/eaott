@@ -1,0 +1,364 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+  background: #121212;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ---------- HOME SCREEN ---------- */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 16px;
+  padding: 10px 16px;
+  background: #1e1e1e;
+  border-radius: 24px;
+  color: #888;
+}
+.admin-link {
+  margin-left: auto;
+  text-decoration: none;
+  font-size: 18px;
+  opacity: 0.8;
+}
+.admin-link:hover { opacity: 1; }
+
+.mini-player {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: #000;
+  cursor: pointer;
+  overflow: hidden;
+}
+.mini-player-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.mini-player-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.15);
+  transition: background 0.2s;
+}
+.mini-player-overlay:hover { background: rgba(0,0,0,0.35); }
+.play-icon { font-size: 42px; opacity: 0.9; }
+
+.tab-bar {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  overflow-x: auto;
+}
+.tab {
+  padding: 10px 24px;
+  border-radius: 24px;
+  border: 1px solid #555;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 15px;
+}
+.tab.active {
+  background: #FFC107;
+  color: #1a1a1a;
+  border-color: #FFC107;
+  font-weight: 600;
+}
+
+.body-row {
+  display: flex;
+  height: calc(100vh - 400px);
+  min-height: 320px;
+}
+
+.category-list {
+  width: 130px;
+  background: #0d0d0d;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.category-item {
+  padding: 18px 14px;
+  font-size: 15px;
+  color: #999;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+.category-item.active {
+  background: #1e1e1e;
+  color: #fff;
+  border-left-color: #FFC107;
+}
+
+.channel-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.channel-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid #1a1a1a;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.channel-item:hover,
+.channel-item:focus-visible {
+  background: #1e1e1e;
+  outline: 2px solid #FFC107;
+  outline-offset: -2px;
+}
+.channel-item.selected {
+  border: 2px solid #FFC107;
+  border-radius: 8px;
+  background: #2a2412;
+}
+.channel-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.channel-name {
+  font-size: 17px;
+}
+/* Intentionally: no .premium-badge / crown styles exist in this stylesheet */
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  background: #0a0a0a;
+  border-top: 1px solid #1a1a1a;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #888;
+}
+.nav-item.active { color: #FFC107; }
+.nav-item span { font-size: 20px; }
+.nav-item { cursor: pointer; }
+
+.nav-panel {
+  display: none;
+  height: calc(100vh - 400px);
+  min-height: 320px;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 16px;
+  padding: 24px;
+  text-align: center;
+}
+.nav-panel.active { display: flex; }
+
+/* ---------- PLAYER SCREEN ---------- */
+
+.player-surface {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+.player-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.player-top-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+}
+.icon-btn {
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.player-title {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+}
+.player-top-icons { display: flex; gap: 16px; }
+
+.player-center-controls {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.seek-btn {
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.85;
+}
+.seek-btn small { font-size: 11px; }
+.play-pause-btn {
+  font-size: 46px;
+  cursor: pointer;
+}
+
+.player-bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px 24px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+.seek-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.time { font-size: 13px; color: #ccc; }
+.seek-track {
+  flex: 1;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 2px;
+  position: relative;
+}
+.seek-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 96%;
+  background: #FFC107;
+  border-radius: 2px;
+}
+.seek-fill::after {
+  content: '';
+  position: absolute;
+  right: -6px; top: 50%;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: #FFC107;
+}
+.player-bottom-controls {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #ddd;
+}
+.ctrl { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+/* Channel overlay panel — slides in and channel cards scroll forward on select */
+.channel-overlay {
+  position: absolute;
+  top: 0; right: -340px;
+  width: 340px;
+  height: 100%;
+  background: rgba(10,10,10,0.92);
+  transition: right 0.28s ease;
+  display: flex;
+  flex-direction: column;
+}
+.channel-overlay.visible { right: 0; }
+
+.overlay-tab-bar {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  overflow-x: auto;
+  border-bottom: 1px solid #222;
+}
+.overlay-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid #555;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.overlay-tab.active {
+  background: #FFC107;
+  color: #1a1a1a;
+  border-color: #FFC107;
+}
+
+.overlay-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+.overlay-category-list {
+  width: 110px;
+  background: #0a0a0a;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.overlay-cat {
+  padding: 14px 10px;
+  font-size: 13px;
+  color: #999;
+  cursor: pointer;
+}
+.overlay-cat.active { color: #fff; background: #1a1a1a; }
+
+.overlay-channel-list {
+  flex: 1;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.overlay-channel-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #1a1a1a;
+  transition: transform 0.25s ease, background 0.2s;
+}
+.overlay-channel-item.selected {
+  border: 2px solid #FFC107;
+  border-radius: 8px;
+  background: #2a2412;
+  /* "forward" nudge: selected card animates slightly toward viewer */
+  transform: translateX(-6px) scale(1.02);
+}
+.overlay-channel-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.overlay-channel-name { font-size: 14px; }
+
+/* Responsive: keep usable on small phone widths */
+@media (max-width: 400px) {
+  .player-center-controls { gap: 36px; }
+  .channel-overlay { width: 82vw; right: -82vw; }
+}

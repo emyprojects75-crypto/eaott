@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TV Channel Prototype</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ HOME SCREEN ============ -->
+<div id="homeScreen" class="screen active">
+
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <span class="search-placeholder">Search channels</span>
+    <a href="admin.html" class="admin-link" title="Admin: Add Channel/Movie">⚙️</a>
+  </div>
+
+  <!-- Mini preview player -->
+  <div id="miniPlayer" class="mini-player">
+    <img id="miniPlayerImg" src="" alt="preview" class="mini-player-img">
+    <div class="mini-player-overlay">
+      <span class="play-icon">▶</span>
+    </div>
+  </div>
+
+  <!-- Language tabs -->
+  <div id="tabBar" class="tab-bar"></div>
+
+  <div id="homeBodyRow" class="body-row">
+    <!-- Category sidebar -->
+    <div id="categoryList" class="category-list"></div>
+
+    <!-- Channel list -->
+    <div id="channelList" class="channel-list"></div>
+  </div>
+
+  <!-- Placeholder panels for Find / TV / Movie tabs -->
+  <div id="findPanel" class="nav-panel">
+    <div class="nav-panel-msg">🔎 Find screen — search UI goes here.</div>
+  </div>
+  <div id="tvPanel" class="nav-panel">
+    <div class="nav-panel-msg">📺 TV screen — live TV guide goes here.</div>
+  </div>
+  <div id="moviePanel" class="nav-panel">
+    <div class="nav-panel-msg">🎬 Movie screen — movie catalog goes here.</div>
+  </div>
+
+  <!-- Bottom nav -->
+  <div class="bottom-nav">
+    <div class="nav-item active" data-nav="home"><span>🏠</span><small>Home</small></div>
+    <div class="nav-item" data-nav="find"><span>🔎</span><small>Find</small></div>
+    <div class="nav-item" data-nav="tv"><span>📺</span><small>TV</small></div>
+    <div class="nav-item" data-nav="movie"><span>🎬</span><small>Movie</small></div>
+  </div>
+</div>
+
+<!-- ============ PLAYER SCREEN ============ -->
+<div id="playerScreen" class="screen">
+  <div class="player-surface">
+    <img id="playerImg" src="" alt="playing" class="player-img">
+
+    <div class="player-top-bar">
+      <span id="backBtn" class="icon-btn">←</span>
+      <span id="playerTitle" class="player-title">Channel Name</span>
+      <div class="player-top-icons">
+        <span class="icon-btn">⛶</span>
+        <span class="icon-btn">📡</span>
+        <span class="icon-btn">↗</span>
+      </div>
+    </div>
+
+    <div class="player-center-controls">
+      <span class="seek-btn">⏪<small>10s</small></span>
+      <span id="playPauseBtn" class="play-pause-btn">⏸</span>
+      <span class="seek-btn">10s<small>⏩</small></span>
+    </div>
+
+    <div class="player-bottom-bar">
+      <div class="seek-row">
+        <span class="time">0:29:38</span>
+        <div class="seek-track"><div class="seek-fill"></div></div>
+        <span class="time">0:29:58</span>
+      </div>
+      <div class="player-bottom-controls">
+        <div class="ctrl"><span>HD</span> Quality</div>
+        <div class="ctrl"><span>🔒</span> Lock</div>
+        <div class="ctrl"><span>💬</span> Audio &amp; Subtitles</div>
+        <div id="moreChannelsBtn" class="ctrl">▤ More Channels</div>
+      </div>
+    </div>
+
+    <!-- Channel overlay panel that scrolls forward on selection -->
+    <div id="channelOverlay" class="channel-overlay">
+      <div class="overlay-tab-bar">
+        <div class="overlay-tab active">All</div>
+        <div class="overlay-tab">Tamil</div>
+        <div class="overlay-tab">Telugu</div>
+        <div class="overlay-tab">Kannada</div>
+      </div>
+      <div class="overlay-body">
+        <div class="overlay-category-list">
+          <div class="overlay-cat active">All</div>
+          <div class="overlay-cat">Entertainment</div>
+          <div class="overlay-cat">Movies</div>
+          <div class="overlay-cat">Music</div>
+          <div class="overlay-cat">News</div>
+          <div class="overlay-cat">Sports</div>
+          <div class="overlay-cat">Kids</div>
+          <div class="overlay-cat">Infotainment</div>
+        </div>
+        <div id="overlayChannelList" class="overlay-channel-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="channels.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

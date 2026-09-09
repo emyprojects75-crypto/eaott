@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Add Channel / Movie</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="admin-wrap">
+  <h1>Add Channel / Movie</h1>
+  <p class="sub">Supports M3U/M3U8, Xtream Codes API, and Stalker Portal (MAC-based) source types.</p>
+
+  <form id="addForm" class="admin-form">
+
+    <label>Content Type</label>
+    <div class="radio-row">
+      <label><input type="radio" name="contentType" value="channel" checked> Live Channel</label>
+      <label><input type="radio" name="contentType" value="movie"> Movie</label>
+    </div>
+
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="e.g. Sun TV" required>
+
+    <label for="logo">Logo URL</label>
+    <input type="url" id="logo" placeholder="https://.../logo.png">
+
+    <label for="language">Language / Category</label>
+    <select id="language">
+      <option>All</option>
+      <option>Tamil</option>
+      <option>Telugu</option>
+      <option>Kannada</option>
+      <option>Hindi</option>
+      <option>English</option>
+    </select>
+
+    <label for="sourceType">Source Type</label>
+    <select id="sourceType">
+      <option value="m3u8">M3U / M3U8 (direct playlist or stream link)</option>
+      <option value="xtream">Xtream Codes API</option>
+      <option value="stalker">Stalker Portal (MAC based)</option>
+      <option value="direct">Direct URL (other)</option>
+    </select>
+
+    <!-- M3U / M3U8 fields -->
+    <div class="source-fields" data-source="m3u8">
+      <label for="m3uUrl">Stream / Playlist URL (.m3u or .m3u8)</label>
+      <input type="url" id="m3uUrl" placeholder="https://example.com/stream.m3u8">
+    </div>
+
+    <!-- Xtream Codes fields -->
+    <div class="source-fields" data-source="xtream" style="display:none;">
+      <label for="xtreamServer">Server URL</label>
+      <input type="url" id="xtreamServer" placeholder="http://server.com:port">
+      <label for="xtreamUser">Username</label>
+      <input type="text" id="xtreamUser" placeholder="username">
+      <label for="xtreamPass">Password</label>
+      <input type="text" id="xtreamPass" placeholder="password">
+      <label for="xtreamStreamId">Stream ID</label>
+      <input type="text" id="xtreamStreamId" placeholder="e.g. 12345">
+    </div>
+
+    <!-- Stalker Portal fields -->
+    <div class="source-fields" data-source="stalker" style="display:none;">
+      <label for="stalkerPortal">Portal URL</label>
+      <input type="url" id="stalkerPortal" placeholder="http://portal.com/c/">
+      <label for="stalkerMac">MAC Address</label>
+      <input type="text" id="stalkerMac" placeholder="00:1A:79:XX:XX:XX">
+      <label for="stalkerChannelId">Channel / Content ID</label>
+      <input type="text" id="stalkerChannelId" placeholder="e.g. ch101">
+    </div>
+
+    <!-- Direct URL fields -->
+    <div class="source-fields" data-source="direct" style="display:none;">
+      <label for="directUrl">Direct URL</label>
+      <input type="url" id="directUrl" placeholder="https://example.com/stream">
+    </div>
+
+    <button type="submit" class="btn-primary">Add</button>
+  </form>
+
+  <h2>Added Items</h2>
+  <div id="itemList" class="item-list"></div>
+
+  <a class="back-link" href="index.html">← Back to app preview</a>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
